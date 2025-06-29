@@ -19,10 +19,10 @@ using WealthWise_RCD.Models.DatabaseModels;
 using WealthWise_RCD.Services;
 
 var builder = WebApplication.CreateBuilder(args);
-
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
 // Add database connection to build
 builder.Services.AddDbContext<ApplicationDbContext>(options => {
-    options.UseMySQL(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseMySQL(connectionString);
 });
 // Add Identity services
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => {options.SignIn.RequireConfirmedEmail = false; })   //disable email confirmation
